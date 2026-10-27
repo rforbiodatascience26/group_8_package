@@ -5,7 +5,7 @@
 #' @returns The output is a mRNA sequence
 #' @export
 #'
-#' @examples ATGCATTGA is transcribed to AUGCAUUGA
+#' @examples transcribe("ATGCATTGA")
 
 
 transcribe <- function(dna_seq) {

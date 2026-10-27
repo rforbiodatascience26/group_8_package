@@ -11,22 +11,22 @@ Authors@R: c(
     person(
       "Shirley Lois", "Gundugollu",
       email = "s263753@student.dtu.dk",
-      role = c("aut", "cre")
+      role = c("aut")
     ),
     person(
       "Petros", "Gioutsos",
       email = "s263499@student.dtu.dk",
-      role = c("aut", "cre")
+      role = c("aut")
     ),
     person(
       "Ana Valeria", "Garcia Lartigue",
       email = "s263740@student.dtu.dk",
-      role = c("aut", "cre")
+      role = c("aut")
     ),
     person(
       "Lily-Rose", "Borgne",
       email = "s254137@student.dtu.dk",
-      role = c("aut", "cre")
+      role = c("aut")
     )
   )
 Description: This package will replicate the central dogma of molecular biology.
@@ -37,8 +37,11 @@ Depends:
     R (>= 4.1.0)
 RoxygenNote: 7.3.2
 Suggests: 
+    knitr,
+    rmarkdown,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
 Imports: 
     ggplot2,
     stringr
+VignetteBuilder: knitr

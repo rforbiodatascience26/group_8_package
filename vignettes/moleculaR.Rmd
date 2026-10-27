@@ -1,0 +1,104 @@
+---
+title: "moleculaR"
+output: rmarkdown::pdf_document
+vignette: >
+  %\VignetteIndexEntry{moleculaR}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+**GitHub repository:** <https://github.com/rforbiodatascience26/group_8_package>
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(moleculaR)
+```
+
+## About the package
+
+`moleculaR` replicates the central dogma of molecular biology: DNA is transcribed into mRNA, and mRNA is translated into protein. It has one function for each step, from generating a random DNA sequence to plotting the amino acid composition of the resulting protein. It also includes `codon_table`, a standard codon table that maps each of the 64 RNA codons to the one-letter code of the amino acid it encodes (stop codons are written as `"_"`).
+
+```{r, eval = FALSE}
+# Install from GitHub
+devtools::install_github("rforbiodatascience26/group_8_package")
+```
+
+## The functions
+
+This package will replicate the central dogma of molecular biology.
+
+### 1. Generate DNA sequence
+
+**`generate_DNAseq()`** creates a random DNA sequence of a given length by sampling the bases A, T, G and C.
+
+```{r}
+set.seed(1)
+generate_DNAseq(12)
+```
+
+### 2. Transcribe all T bases to U
+
+**`transcribe()`** turns DNA into mRNA by replacing every T with U.
+
+```{r}
+transcribe("ATGCATTGA")
+```
+
+### 3. Extract codons
+
+**`extract_codons()`** splits a sequence into codons (triplets). `start` sets the reading frame; leftover bases that don't form a full codon are dropped.
+
+```{r}
+extract_codons("AUGCAUUGA")
+extract_codons("AUGCAUUGA", start = 2)
+```
+
+### 4. Get Codon
+
+**`get_codon()`** translates codons into a protein sequence by looking each one up in `codon_table` and joining the amino acids into one string.
+
+```{r}
+get_codon(c("AUG", "CAU", "UGA"))
+```
+
+### 5. Plot Amino Acid Counts
+
+**`plot_aa_counts()`** counts how often each amino acid (character) occurs in a sequence and shows the counts as a bar chart. It uses `ggplot2` and `stringr`.
+
+## Using the functions together
+
+The output of each function is the input to the next, so the whole central dogma can be run as one pipeline:
+
+```{r, fig.width = 6, fig.height = 2.6, fig.align = "center"}
+set.seed(42)
+protein <- generate_DNAseq(150) |>
+  transcribe() |>
+  extract_codons() |>
+  get_codon()
+protein
+plot_aa_counts(protein)
+```
+
+
+
+## Use cases and possible extensions
+
+`moleculaR` is useful for teaching and illustrating the central dogma, for generating random test sequences, and for a quick overview of the amino acid composition of a short sequence. Random sequences can also serve as a simple null model, e.g. to see how often stop codons appear by chance.
+
+The package has clear limitations: translation does not look for a start codon (AUG) and continues past stop codons, and random DNA has an even base composition, unlike real genomes. Functions that could be added include a reverse complement, GC content, finding open reading frames, translating all six reading frames, reading sequences from FASTA files, and simulating mutations.
+
+## Group discussion
+
+- **Adding dependencies:** `plot_aa_counts()` needs `ggplot2` and `stringr`. We added them with `usethis::use_package("ggplot2")` and `usethis::use_package("stringr")`, which lists them under `Imports` in the `DESCRIPTION` file so they are installed together with `moleculaR`.
+- **Why limit dependencies:** every dependency has to be installed by users, can change or break between versions, and makes the package harder to maintain. They can't always be avoided: writing our own plotting or string handling would be more work and more error-prone than relying on well-tested packages.
+- **`@importFrom` vs. `package::function()`:** `@importFrom` adds the function to the package's `NAMESPACE`, so it can be called without a prefix. `package::function()` shows explicitly in the code where a function comes from, which makes the code easier to read. Either way, the package must be listed in `DESCRIPTION`.
+
+## Use of generative AI
+
+The AI assistant Claude (Anthropic, 2026) was used to help draft the text of this vignette. All text was reviewed and edited by the authors, who take full responsibility for the content.

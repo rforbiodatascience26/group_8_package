@@ -16,5 +16,5 @@ The output is a mRNA sequence
 Tanscribe_T_U
 }
 \examples{
-ATGCATTGA is transcribed to AUGCAUUGA
+transcribe("ATGCATTGA")
 }
