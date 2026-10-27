@@ -1,3 +1,6 @@
 test_that("multiplication works", {
-  expect_equal(2 * 2, 4)
+  result <- get_codon(3)
+
+  expect_type(result, "character")
+
 })
