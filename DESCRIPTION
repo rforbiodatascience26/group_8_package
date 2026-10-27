@@ -1,0 +1,35 @@
+Package: moleculaR
+Type: Package
+Title: What the Package Does (Title Case)
+Version: 0.1.0
+Authors@R: c(
+    person(
+      "Grete", "Paat",
+      email = "s263483@student.dtu.dk",
+      role = c("aut", "cre")
+    ),
+    person(
+      "Shirley Lois", "Gundugollu",
+      email = "s263753@student.dtu.dk",
+      role = c("aut", "cre")
+    ),
+    person(
+      "Petros", "Gioutsos",
+      email = "s263499@student.dtu.dk",
+      role = c("aut", "cre")
+    ),
+    person(
+      "Ana Valeria", "Garcia Lartigue",
+      email = "s263740@student.dtu.dk",
+      role = c("aut", "cre")
+    ),
+    person(
+      "Lily-Rose", "Borgne",
+      email = "s254137@student.dtu.dk",
+      role = c("aut", "cre")
+    )
+  )
+Description: This package will replicate the central dogma of molecular biology.
+License: MIT + file LICENSE
+Encoding: UTF-8
+LazyData: true
